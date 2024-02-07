@@ -4,12 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Receptionist Interface</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            padding-top: 50px;
+            text-align: center;
+            background-color: peachpuff;
+        }
+        .number-container {
+            margin-top: 20px;
+        }
+        #nextNumber {
+            font-size: 48px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Receptionist</h1>
-    <p>Next patient in line to see the Dr.</p>
-    <p id="nextNumber"></p>
-    <button onclick="callPatient()">Call Patient</button>
+    <div class="container">
+        <h1 class="mb-4">Receptionist</h1>
+        <p>Next patient in line to see the Dr.</p>
+        <div class="number-container">
+            <p id="nextNumber" class="mb-4">Waiting for patients...</p>
+            <button class="btn btn-primary" onclick="callPatient()">Call Patient</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, only needed if you use Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JavaScript file -->
     <script src="/javascript/callPatient.js"></script>
 </body>
 </html>

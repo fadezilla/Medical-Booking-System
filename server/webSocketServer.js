@@ -1,6 +1,5 @@
 const WebSocket = require('ws');
 const http = require('http');
-//Creating a server to work with the WebSocket
 const server = http.createServer();
 const wss = new WebSocket.Server({ server });
 
@@ -38,6 +37,15 @@ wss.on('connection', (ws) => {
             ws.send(JSON.stringify({ type: 'nextNumber', data: nextNumber }));
             ws.send(JSON.stringify({ type: 'userNumber', data: prevNumber }));
             console.log(queue);
+            // Updates the next in line on the receptionist page whenever a client arrives
+            const nextPatientNumber = queue[0];
+            if(nextPatientNumber !== undefined){
+                wss.clients.forEach((client) => {
+                    if (client !== ws && client.readyState === WebSocket.OPEN) {
+                        client.send(JSON.stringify({ type: 'nextPatientNumber', data: nextPatientNumber }));
+                    }
+                });
+            }
         } else if (message === 'callPatient'){
             const nextPatientDisplay = queue[1];
             const nextPatientNumber = queue[0];
@@ -57,49 +65,3 @@ wss.on('connection', (ws) => {
 server.listen(8003, () => {
     console.log('WebsSocket server started on port 8003')
 });
-
-
-
-/* wss.on('connection', (ws) => {
-    console.log('Client connected');
-
-    ws.on('message', (message) => {
-        console.log('Received message:', message);
-
-        wss.clients.forEach((client) => {
-            if(client.readyState === WebSocket.OPEN) {
-                client.send(message);
-            }
-        });
-
-        if (message === 'takeNumber') {
-            const newNumber = Math.floor(Math.random() * 1001);
-
-            queue.push(newNumber);
-
-            wss.clients.forEach((client) => {
-                if(client.readyState === WebSocket.OPEN) {
-                    client.send(JSON.stringify({ type: 'updateNumber', data: newNumber}));
-                }
-            });
-        } else if (message === 'removeNumber') {
-            const removedNumber = queue.shift();
-            console.log('removed number: ', removedNumber);
-
-            const nextNumber = Math.floor(Math.random() * 1001);
-            queue.push(nextNumber);
-
-            wss.clients.forEach((client) => {
-                if(client.readyState === WebSocket.OPEN){
-                    client.send(JSON.stringify({ type: 'nextNumber', data: nextNumber}));
-                }
-            })
-        }
-
-    });
-    ws.on('close', () => {
-        console.log('client disconnected');
-    })
-
-    ws.send('Welcome to the Reception server!');
-}); */

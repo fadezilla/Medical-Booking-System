@@ -1,16 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Patient interface</title>
-    </head>
-    <body>
-        <h1>Patients</h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient interface</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom styles */
+        body {
+            padding-top: 50px;
+            text-align: center;
+            background-color: peachpuff;
+        }
+        .number-container {
+            margin-top: 20px;
+        }
+        #currentNumber {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        #userNumber {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Patients</h1>
         <p>Please take a number</p>
-        <p id="currentNumber"></p>
-        <button onclick="takeNumber()">Take this number</button>
-        <p id="userNumber" style="display: none;">Your number: <span id="takenNumber"></span></p>
-        <script src="/javascript/takeNumber.js"></script>
-    </body>
+        <div class="number-container">
+            <p id="currentNumber" class="mb-4"></p>
+            <button class="btn btn-primary" onclick="takeNumber()">Take this number</button>
+            <p id="userNumber" class="mt-4">Your number: <span id="takenNumber"></span></p>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (optional, only needed if you use Bootstrap components) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Your custom JavaScript file -->
+    <script src="/javascript/takeNumber.js"></script>
+</body>
 </html>
